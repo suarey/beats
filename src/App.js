@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Layout from './components/common/Layout/Layout';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import Logout from './components/Logout/Logout';
+import Signup from './components/Signup/Signup';
+import VIP from './components/VIP/VIP';
+import httpClient from './utilities/httpClient';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	state = { currentUser: httpClient.getCurrentUser() };
+
+	onAuthSuccess = () => {
+		this.setState({ currentUser: httpClient.getCurrentUser() });
+	}
+
+	onLogout = () => {
+		httpClient.logOut();
+		this.setState({ currentUser: null });
+	}
+
+  	render() {
+		let { currentUser } = this.state;
+		let { onAuthSuccess, onLogout } = this;
+		return (
+			<Layout currentUser={currentUser}>
+				<Switch>
+					<Route exact path="/" component={Home}/>
+					<Route path="/login" render={(props) => {
+						return <Login {...props} onLoginSuccess={onAuthSuccess}/>
+					}}/>
+					<Route path="/logout" render={() => {
+						return <Logout onLogout={onLogout}/>
+					}} />
+					<Route path="/signup" render={(props) => {
+						return <Signup {...props} onSignupSuccess={onAuthSuccess}/>
+					}}/>
+					<Route path="/vip" render={() => {
+						return currentUser ?  <VIP/> : <Redirect to="/login"/>
+					}}/>
+				</Switch>
+			</Layout>
+		);
+	}
 }
 
 export default App;
