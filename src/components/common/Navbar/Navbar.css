@@ -1,9 +1,56 @@
 .nav {
-    background-color: #eee;
+    background-color: #c6bb9d;
     margin: 0px !important;
     padding: 15px;
 }
 
 .nav-link {
+    white-space: nowrap;
     margin-right: 10px;
+    float: right; 
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover { color: #e74525; }
+
+.button-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+button {
+    background: #c6bb9d;
+    
+    height: 24vw;
+    margin: 1%;
+    width: 23%; 
+
+    font-weight: 900;
+}
+
+.rectangle {
+    height: 15px;
+    width: 75px;
+    background-color: #e74525;
+  }
+
+  @media screen and (max-width:500px){
+    button {
+        width: 30%; 
+    }
+    
+  }
+
+@media screen and (max-width:475px) {
+    button {
+        width: 40%
+    }
+}
+
+@media screen and (max-width: 400px) {
+    button {
+        width: 80%;
+    }
 }
