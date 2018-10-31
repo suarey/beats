@@ -5,13 +5,13 @@ const
 	verifyToken = require('../serverAuth').verifyToken;
 
 
-// Protected
-usersRouter.use(verifyToken);	
+
 usersRouter.get('/', usersCtrl.index)
 usersRouter.post('/', usersCtrl.create)
 usersRouter.post('/authenticate', usersCtrl.authenticate);
 
-
+// Protected
+usersRouter.use(verifyToken);	
 usersRouter.get('/:id', usersCtrl.show)
 usersRouter.patch('/:id', usersCtrl.update)
 usersRouter.delete('/:id', usersCtrl.destroy)
