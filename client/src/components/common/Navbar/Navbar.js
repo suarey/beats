@@ -16,6 +16,7 @@ export default ({ currentUser }) => {
                         <span>
                             <span className="nav-link">Welcome {currentUser.name}</span>
                             <Link className="nav-link" to="/logout">LOGOUT</Link>
+                            <Link className="nav-link" to="/profile">PROFILE</Link>
                         </span>        
                     )
                     : (

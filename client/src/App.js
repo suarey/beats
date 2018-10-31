@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Signup from './components/Signup/Signup';
 import VIP from './components/VIP/VIP';
+import Profile from './components/Profile/Profile';
 import httpClient from './utilities/httpClient';
 import './App.css';
 
@@ -39,6 +40,9 @@ class App extends Component {
 					}}/>
 					<Route path="/vip" render={() => {
 						return currentUser ?  <VIP/> : <Redirect to="/login"/>
+					}}/>
+					<Route path="/profile" render={() => {
+						return currentUser ?  <Profile/> : <Profile/>
 					}}/>
 				</Switch>
 			</Layout>
