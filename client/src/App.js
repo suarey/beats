@@ -41,8 +41,8 @@ class App extends Component {
 					<Route path="/vip" render={() => {
 						return currentUser ?  <VIP/> : <Redirect to="/login"/>
 					}}/>
-					<Route path="/profile" render={() => {
-						return currentUser ?  <Profile  currentUser={currentUser} /> : <Redirect to="/login"/>
+					<Route path="/profile" render={(props) => {
+						return currentUser ?  <Profile {...props}  currentUser={currentUser} /> : <Redirect to="/login"/>
 					}}/>
 				</Switch>
 			</Layout>

@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 
 class Profile extends Component {
     state = {
-       user: Object.assign({this.props.currentUser}) ,
+       user: Object.assign({}, this.props.currentUser) ,
        editing: false
     }
 
@@ -13,11 +13,12 @@ class Profile extends Component {
     }
 
     render() {
+        let { editing, user } = this.state;
         return(
             <div>
-                <button onClick={() => this.setState({ editing: !editing })}></button>
+                <button onClick={() => this.setState({ editing: !editing })}>EDIT</button>
                 <h1 className="display: inline">PROFILE</h1>
-                <h3 className="display: inline">EDIT</h3>
+              
             </div>
         )
     
