@@ -4,20 +4,18 @@ import React, {Component} from 'react'
 
 class Profile extends Component {
     state = {
-        name: "",
-        email: "", 
-        password: "",
-        recordings: []
+       user: Object.assign({this.props.currentUser}) ,
+       editing: false
     }
 
     handleChange = (e) => {
-        let { name, email, password, recordings } = e.target;
-        this.setState({ [name]: "", [email]: "", [password]: "", [recordings]: "" });
+
     }
 
     render() {
         return(
             <div>
+                <button onClick={() => this.setState({ editing: !editing })}></button>
                 <h1 className="display: inline">PROFILE</h1>
                 <h3 className="display: inline">EDIT</h3>
             </div>
