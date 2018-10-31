@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import UserInfo from '../UserInfo/UserInfo'
+import EditUserForm from '../EditUserForm/EditUserForm'
 
 // in state hold name, email, sequences, editing (defaults to false).
 
@@ -16,9 +18,9 @@ class Profile extends Component {
         let { editing, user } = this.state;
         return(
             <div>
-                <button onClick={() => this.setState({ editing: !editing })}>EDIT</button>
-                <h1 className="display: inline">PROFILE</h1>
-              
+            <h1 className="display: inline">PROFILE</h1>
+                <h3 onClick={() => this.setState({ editing: !editing })}>EDIT</h3>
+                {editing ? <EditUserForm user={user} /> : <UserInfo user={this.props.currentUser}/>}                
             </div>
         )
     

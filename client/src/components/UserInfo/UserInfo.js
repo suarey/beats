@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default () => {
+export default ({user}) => {
     return (
      
         <div>
-            <h3>{currentUser.name}</h3>
-            <h3>{currentUser.email}</h3>
+            <h3>{user.name}</h3>
+            <h3>{user.email}</h3>
         </div>
         
     )
