@@ -22,9 +22,26 @@ class App extends Component {
 		this.setState({ currentUser: null });
 	}
 
+	removeUser = async (deleteUser, _id) => {
+		let user = await httpClient.removeUser(deleteUser, _id);
+		this.setState({ currentUser: user });
+		httpClient.logOut();
+		this.setState({ currentUser: null });
+	}
+	
+
+	updateProfile = async (updatedCredentials, _id) => {
+
+		alert("UPDATING PROFILE")
+		let user = await httpClient.updateCredentials(updatedCredentials, _id);
+		this.setState({ currentUser: user })
+		console.log(user);
+	}
+
+
   	render() {
 		let { currentUser } = this.state;
-		let { onAuthSuccess, onLogout } = this;
+		let { onAuthSuccess, onLogout, updateProfile } = this;
 		return (
 			<Layout currentUser={currentUser}>
 				<Switch>
@@ -42,7 +59,7 @@ class App extends Component {
 						return currentUser ?  <VIP/> : <Redirect to="/login"/>
 					}}/>
 					<Route path="/profile" render={(props) => {
-						return currentUser ?  <Profile {...props}  currentUser={currentUser} /> : <Redirect to="/login"/>
+						return currentUser ?  <Profile {...props} updateProfile={updateProfile} currentUser={currentUser} /> : <Redirect to="/login"/>
 					}}/>
 				</Switch>
 			</Layout>

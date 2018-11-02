@@ -22,6 +22,21 @@ httpClient.getCurrentUser = function() {
     return null
 };
 
+httpClient.updateCredentials = async function(credentials, id) {
+    // 'this' referes to the instance of axios instantiated above.
+    let res = await this({ method: "patch", url: `/api/users/${id}`, data: credentials });
+    // Grab the token from the data that's returned in the response.
+    const token = res.data.token;
+
+    if (token) {
+        this.defaults.headers.common.token = this.setToken(token);
+        console.log("TOKEN", jwtDecode(token))
+        return jwtDecode(token);
+    } else {
+        return false;
+    }
+}
+
 httpClient.authenticate = async function(credentials, url) {
     // 'this' referes to the instance of axios instantiated above.
     let res = await this({ method: "post", url, data: credentials });
@@ -34,6 +49,17 @@ httpClient.authenticate = async function(credentials, url) {
     } else {
         return false;
     }
+}
+
+httpClient.removeUser = async function(id) {
+    // 'this' referes to the instance of axios instantiated above.
+    let res = await this({ method: "delete", url: `/api/users/${id}`});
+    if (res.data.message === "SUCCESS") {
+        return true;
+    } else {
+        return false;
+    }
+    // Grab the token from the data that's returned in the response.
 }
 
 httpClient.logOut = function () {

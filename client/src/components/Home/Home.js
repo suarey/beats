@@ -1,13 +1,16 @@
 // import React from 'react';
 import React, { Component } from 'react';
 import Header from '../common/Header/Header';
+import httpClient from '../../utilities/httpClient';
 
 
 
 class Home extends Component {
 
     state = {
-        playing: "false"
+        playing: "false",
+        recording: false,
+        currentRecording: []
     }
     // playKick = (event) => {
     //     let samplePathKick = '/assets/kick.wav';
@@ -21,26 +24,42 @@ class Home extends Component {
     // }
 
     playSample = (event) =>{
+        let { recording } = this.state;
         console.log("EVENT", event.target.getAttribute("data-sample"))
         let sample = event.target.getAttribute("data-sample");
+        // If recording set to true, push sample into array
+        if(recording) {
+            alert("HIT")
+             this.setState((state)=>{
+             return  { currentRecording: [...state.currentRecording, sample] }
+            })
+        }
+
+        // Once "STOP" is clicked 1. sends currentRecording to database, 2. Set recording false
         let samplePath = `/assets/${sample}.wav`;
         let audio = new Audio(samplePath)
          audio.play()
     }
-    handleClick = async (e) => {
 
-        // let button = e.target;
-        // await this.playAudio(button)
-        // button.dataset.playing = "false";
-        // audioElement.addEventListener('ended', () => {
-        //     playButton.dataset.playing = 'false';
-        // }, false);
+    record = () => {
+        this.setState({ recording: true })
+    };
+
+    stopRecord = async () => {
+        let {currentRecording} = this.state; 
+        // Uses httpClient to post a recording to (/api/sequences)
+        let res = await httpClient.post("api/sequences", {beats: currentRecording})
+        this.setState({ recording: false})
     }
+
 
     render() {
         return ( 
             <div>
+                Recording? {this.state.recording ? "yes" : "no"}
                 <Header text={"PUSH MY BUTTONS!"}/>
+                <button onClick={this.record} className="btn-little">RECORD</button>
+                <button onClick={this.stopRecord} className="btn-little">STOP</button>
                 <div className="button-wrapper">
                 <button  name="clap-1" data-sample="clap-1" onClick={this.playSample} role="switch" aria-checked="false">
                     CLAP
@@ -92,6 +111,7 @@ class Home extends Component {
                     MID-TOM
                 </button>
                 </div>
+             
             </div>
         )
     }

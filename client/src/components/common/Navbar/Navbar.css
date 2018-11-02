@@ -26,8 +26,18 @@ button {
     height: 24vw;
     margin: 1%;
     width: 23%; 
-
+    border-radius: 5%;
     font-weight: 900;
+}
+
+.btn-little {
+    background: #c6bb9d;
+    height: 2vw;
+    width: 15%; 
+    font-weight: 900;
+    margin-left: center;
+    margin-right: center;
+
 }
 
 .rectangle {
