@@ -9,14 +9,20 @@ class Profile extends Component {
     state = {
        user: null ,
        editing: false,
+       playing: { 
+           id: null,
+           active: false
+       },
+       recordings: []
     }
-    componentDidMount () {
-        let { user } = this.state;
+
+    async componentDidMount () {
         // call user profile and setState({user:res}) to response 
-        let res = httpClient.getCurrentUser(user)
-        this.setState({ user: res })
-        // 
+        let res = await httpClient({ method: 'get', url: `/api/users/${this.props.currentUser._id}` });
+        let user = res.data.payload;
+        this.setState({ user });
     }
+
     handleChange = (e) => {
         let { name, value } = e.target;
         let { user } = this.state;
@@ -43,25 +49,41 @@ class Profile extends Component {
         if (res) this.props.history.push('/logout');
     }
 
+    togglePlay = (id) => {
+        let playing = !this.state.playing
+        this.setState({ playing: { id, active: !this.state.playing.active } })
+    }
+
  
     render() { 
-        let { editing, user } = this.state;
-        let { handleChange, handleSubmit, handleDelete } = this;
+        let { editing, user, playing } = this.state;
+        let { handleChange, handleSubmit, handleDelete, togglePlay } = this;
+        if (!user) return <div></div>
         return(
             <div>
             <h1 className="display: inline">PROFILE</h1>
-            { user && 
                 <div>  <h3 onClick={() => this.setState({ editing: !editing })}>EDIT</h3>
                 { editing 
                     ? <EditUserForm 
                         myChange={handleChange} 
-                        user={user} 
+                        user={user}
                         handleSubmit={handleSubmit}
                         handleDelete={handleDelete}/> 
                     : <UserInfo user={this.state.user}/>
                 }    
-                </div> } 
-              
+                </div>  
+                <div style={{ marginLeft: 300, marginRight: 300 }}>
+                {user.recordings.map(r => {
+                    return (
+                        <div key={r._id}style={{ margin: "20px", padding: "10px", border: "1px solid black", display: "flex", justifyContent: "space-between" }}>
+                            {(playing.active && r._id === playing.id )
+                                ? <i onClick={() => togglePlay(r._id)} className="fas fa-pause"></i> 
+                                : <i onClick={() => togglePlay(r._id)} className="fas fa-play"></i>}
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                    )
+                })}
+                </div>
             </div>
         )
     
