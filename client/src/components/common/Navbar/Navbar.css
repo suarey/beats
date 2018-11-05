@@ -28,7 +28,19 @@ button {
     width: 23%; 
     border-radius: 5%;
     font-weight: 900;
+    border: 3px solid #e74525;
+    box-shadow: 4px 4px 5px #999;
+    border-width: 5px;
 }
+button:hover {
+    box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+  }
+  
+  
+button:hover:after {
+    background: #F3CE5E;
+    animation: 2s counterclockwise infinite;
+  }
 
 .btn-little {
     background: #c6bb9d;

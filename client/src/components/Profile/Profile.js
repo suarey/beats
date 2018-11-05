@@ -77,7 +77,7 @@ class Profile extends Component {
                 
                 </div>  
                 <div style={{ marginLeft: 300, marginRight: 300 }}>
-                {user.recordings.map(r => {
+                {user && user.recordings.map(r => {
                     return (
                         <div key={r._id}style={{ margin: "20px", padding: "10px", border: "1px solid black", display: "flex", justifyContent: "space-between" }}>
                             {(playing.active && r._id === playing.id )

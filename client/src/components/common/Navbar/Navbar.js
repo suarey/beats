@@ -7,10 +7,11 @@ export default ({ currentUser }) => {
         <nav className="nav clearfix">
             <div className="float-left">
                 <span ><Link to="/" ><img  className="max-width: 50%" src="https://i.imgur.com/2iHabfd.png"  /></Link></span>
-                <Link className="nav-link" to="/">HOME</Link>
+               
                 {/* <Link className="nav-link" to="/vip">VIP</Link> */}
             </div>
             <div className="float-right">
+            <Link className="nav-link" to="/">HOME</Link>
                 {currentUser
                     ? (
                         <span>
