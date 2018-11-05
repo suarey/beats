@@ -29,7 +29,7 @@ class Home extends Component {
         let sample = event.target.getAttribute("data-sample");
         // If recording set to true, push sample into array
         if(recording) {
-            alert("HIT")
+           
              this.setState((state)=>{
              return  { currentRecording: [...state.currentRecording, sample] }
             })
@@ -56,7 +56,8 @@ class Home extends Component {
     render() {
         return ( 
             <div>
-                Recording? {this.state.recording ? "yes" : "no"}
+            
+                {/* Recording? {this.state.recording ? "yes" : "no"} */}
                 <Header text={"PUSH MY BUTTONS!"}/>
                 <button onClick={this.record} className="btn-little">RECORD</button>
                 <button onClick={this.stopRecord} className="btn-little">STOP</button>

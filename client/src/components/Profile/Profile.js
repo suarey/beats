@@ -7,7 +7,7 @@ import httpClient from '../../utilities/httpClient';
 
 class Profile extends Component {
     state = {
-       user: null ,
+       user: Object.assign({}, this.props.currentUser) ,
        editing: false,
        playing: { 
            id: null,
@@ -51,17 +51,20 @@ class Profile extends Component {
 
     togglePlay = (id) => {
         let playing = !this.state.playing
-        this.setState({ playing: { id, active: !this.state.playing.active } })
+        this.setState({ playing: { id, active: !playing.active } 
+        })
     }
 
  
     render() { 
         let { editing, user, playing } = this.state;
         let { handleChange, handleSubmit, handleDelete, togglePlay } = this;
-        if (!user) return <div></div>
+        if (!user) return <div></div> 
         return(
             <div>
+              
             <h1 className="display: inline">PROFILE</h1>
+         
                 <div>  <h3 onClick={() => this.setState({ editing: !editing })}>EDIT</h3>
                 { editing 
                     ? <EditUserForm 
@@ -70,7 +73,8 @@ class Profile extends Component {
                         handleSubmit={handleSubmit}
                         handleDelete={handleDelete}/> 
                     : <UserInfo user={this.state.user}/>
-                }    
+                }   
+                
                 </div>  
                 <div style={{ marginLeft: 300, marginRight: 300 }}>
                 {user.recordings.map(r => {

@@ -9,7 +9,7 @@ const
 	PORT = process.env.PORT || 4000,
 	usersRoutes = require('./routes/users.js'),
 	sequencesRoutes = require('./routes/sequences.js'),
-	path =require('path');
+	path = require('path');
 	
 
 
@@ -20,8 +20,8 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err) => {
 // Express Configuration
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'))
-app.use(express.json())
+app.use(logger('dev'));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.get('/api', (req, res) => {
