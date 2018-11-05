@@ -64,10 +64,9 @@ class Profile extends Component {
         return(
             <div>
             <h1 className="header" >PROFILE</h1>
-            
                 <div>  <h3 onClick={() => this.setState({ editing: !editing })}>EDIT</h3>
                 { editing 
-                    ? <EditUserForm 
+                    ? <EditUserForm
                         myChange={handleChange}
                         user={user}
                         handleSubmit={handleSubmit}
