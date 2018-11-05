@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../common/Header/Header';
 import httpClient from '../../utilities/httpClient';
+import './Login.css';
 
 class Login extends Component {
     state = { 
@@ -31,7 +32,7 @@ class Login extends Component {
             <div>
                 <Header text={"Login"}/>
                 <div className="row">
-                    <div className="column column-50 column-offset-25">
+                    <div className="login-page" className="column column-50 column-offset-25">
                         <form onSubmit={handleSubmit}>
                             <label>Email: </label>
                             <input
@@ -49,7 +50,7 @@ class Login extends Component {
                                 onChange={handleChange}
                                 value={password}
                             />
-                            <input type="submit"/>
+                            <input className="sub-button" type="submit"/>
                         </form>
                     </div>
                 </div>
@@ -57,5 +58,24 @@ class Login extends Component {
         );
     }
 }
+
+
+
+
+
+
+{/* <div class="login-page">
+  <div class="form">
+    <form class="login-form">
+    <input
+    type="password"
+    name="password"
+    placeholder="Secret Password..."
+    onChange={handleChange}
+    value={password}
+    />
+    </form>
+  </div>
+</div> */}
 
 export default Login;

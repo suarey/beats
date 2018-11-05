@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import UserInfo from '../UserInfo/UserInfo'
 import EditUserForm from '../EditUserForm/EditUserForm';
 import httpClient from '../../utilities/httpClient';
+import './Profile.css';
 
 // in state hold name, email, sequences, editing (defaults to false).
 
@@ -59,39 +60,25 @@ class Profile extends Component {
     render() { 
         let { editing, user, playing } = this.state;
         let { handleChange, handleSubmit, handleDelete, togglePlay } = this;
-        if (!user) return <div></div> 
+        if (user) return <div>HELLO</div>
         return(
             <div>
-              
-            <h1 className="display: inline">PROFILE</h1>
-         
+            <h1 className="header" >PROFILE</h1>
+            
                 <div>  <h3 onClick={() => this.setState({ editing: !editing })}>EDIT</h3>
                 { editing 
                     ? <EditUserForm 
-                        myChange={handleChange} 
+                        myChange={handleChange}
                         user={user}
                         handleSubmit={handleSubmit}
                         handleDelete={handleDelete}/> 
-                    : <UserInfo user={this.state.user}/>
+                    : <UserInfo user={user}/>
                 }   
                 
                 </div>  
-                <div style={{ marginLeft: 300, marginRight: 300 }}>
-                {user && user.recordings.map(r => {
-                    return (
-                        <div key={r._id}style={{ margin: "20px", padding: "10px", border: "1px solid black", display: "flex", justifyContent: "space-between" }}>
-                            {(playing.active && r._id === playing.id )
-                                ? <i onClick={() => togglePlay(r._id)} className="fas fa-pause"></i> 
-                                : <i onClick={() => togglePlay(r._id)} className="fas fa-play"></i>}
-                            <i class="fas fa-trash-alt"></i>
-                        </div>
-                    )
-                })}
-                </div>
-            </div>
+            
+            </div>  
         )
-    
-       
     }
 }
 

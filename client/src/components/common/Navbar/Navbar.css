@@ -58,6 +58,12 @@ button:hover:after {
     background-color: #e74525;
   }
 
+  #header {
+    border-top: 3px;
+    border-top-color: #e74525;
+    box-lines: 10px;
+}
+
   @media screen and (max-width:500px){
     button {
         width: 30%; 
@@ -76,3 +82,6 @@ button:hover:after {
         width: 80%;
     }
 }
+
+
+

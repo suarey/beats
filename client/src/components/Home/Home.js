@@ -58,7 +58,7 @@ class Home extends Component {
             <div>
             
                 {/* Recording? {this.state.recording ? "yes" : "no"} */}
-                <Header text={"PUSH MY BUTTONS!"}/>
+                <Header text={"MAKE SOME 909 BEATS!"}/>
                 <button onClick={this.record} className="btn-little">RECORD</button>
                 <button onClick={this.stopRecord} className="btn-little">STOP</button>
                 <div className="button-wrapper">
